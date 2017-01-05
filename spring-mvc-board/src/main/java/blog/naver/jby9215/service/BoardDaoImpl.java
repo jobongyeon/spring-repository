@@ -30,5 +30,10 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(BOARD_NS+"selectBoardListPerPage", map);
 	}
+	@Override
+	public Board selectBoardByKey(int boardNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(BOARD_NS+"selectBoardByKey", boardNo);
+	}
 	
 }

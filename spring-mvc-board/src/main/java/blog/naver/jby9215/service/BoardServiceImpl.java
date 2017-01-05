@@ -17,7 +17,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public Map<String, Object> getBoardListPerCurrentPage(int currentPage) {
-		System.out.println(this.getClass()+" **test BoardServiceImpl ");
+		System.out.println(this.getClass()+" test BoardServiceImpl 실행");
 		// pagePerRow,beginRow
 		int pagePerRow = 10;
 		int beginRow = (currentPage-1)*pagePerRow;
@@ -41,4 +41,11 @@ public class BoardServiceImpl implements BoardService{
 		returnMap.put("list", list);
 		return returnMap;
 	}
+	@Override
+	public Board boardView(int boardNo) {
+		// TODO Auto-generated method stub
+		return boardDao.selectBoardByKey(boardNo);
+	}
+	
+	
 }

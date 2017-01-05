@@ -23,7 +23,7 @@ public class BoardController {
 		System.out.println(this.getClass()+" test boardList 실행");
 		
 		Map<String, Object> returnMap = boardService.getBoardListPerCurrentPage(currentPage);
-		model.addAttribute("currentPage");
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalRowCount", returnMap.get("totalRowCount"));
 		model.addAttribute("lastPage", returnMap.get("lastPage"));
 		model.addAttribute("list", returnMap.get("list"));
@@ -41,5 +41,10 @@ public class BoardController {
 		System.out.println(this.getClass()+" test boardAdd Get 실행");
 		return "/board/boardAdd"; //forward
 	}
-
+	@RequestMapping(value="/board/boardView")
+	public String boardView(int boardNo) {
+		System.out.println(this.getClass()+" test boardView 실행");
+		boardService.boardView(boardNo);
+		return "/board/boardView";
+	}
 }
