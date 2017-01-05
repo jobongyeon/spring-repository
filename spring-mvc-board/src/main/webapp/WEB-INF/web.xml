@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<!-- Processes application requests -->
+	<!-- 스프링의 통로가 되는 부분 DispatcherServlet역할과 같음 요청이 들어오면 해당요청을 처리해야할 곳으로 넘겨주고 서버응답을 클라이언트에 보내주는 역할-->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- DispatcherServlet역할을 할 xml파일의 경로를 정해줌. -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/servlet-context.xml</param-value>
+		</init-param>
+		<!-- 톰캣 시작시 로딩순서 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 클라이언트가 요청한 url에 따라서 요청을 처리할 서블릿 객체를 연결 -->
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
