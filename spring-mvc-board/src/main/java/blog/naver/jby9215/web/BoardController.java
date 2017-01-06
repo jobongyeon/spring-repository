@@ -64,14 +64,15 @@ public class BoardController {
 	@RequestMapping(value="/board/boardModify", method=RequestMethod.GET)
 	public String boardUpdate(Model model, @RequestParam(value="boardNo")int boardNo){
 		System.out.println(this.getClass()+" test boardUpdate GET 실행");
-		model.addAttribute("boardNo", boardNo);
+		Board board = boardService.boardView(boardNo);
+		model.addAttribute("board", board);
 		return "/board/boardModify";
 	}
 	@RequestMapping(value="/board/boardModify", method=RequestMethod.POST)
 	public String boardUpdate(Model model, Board board) {
 		System.out.println(this.getClass()+" test boardUpdate POST 실행");
 		if(boardService.boardUpdate(board) != 1) {
-			model.addAttribute("boardNo", board.getBoardNo());
+			model.addAttribute("board", board);
 				return "/board/boardModify";
 		}
 		return "redirect:/board/boardList";
