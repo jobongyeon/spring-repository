@@ -8,7 +8,7 @@
 			parameterType="blog.naver.jby9215.service.Board">
 		UPDATE board SET 
 			board_title = #{boardTitle}, 
-			board_content = #{boardContent} 
+			board_content = #{boardContent}
 		WHERE 
 			board_no = #{boardNo} 
 		AND 
@@ -67,10 +67,10 @@
 				board_user, 
 				board_date) 
 			values(
-				${boardPw},
-				${boardTitle},
-				${boardContent},
-				${boardUser},
+				#{boardPw},
+				#{boardTitle},
+				#{boardContent},
+				#{boardUser},
 				now()
 			)
 	</insert>

@@ -32,6 +32,7 @@ public class BoardController {
 	@RequestMapping(value="/board/boardAdd", method=RequestMethod.POST)
 	public String boardAdd(Board board) {
 		System.out.println(this.getClass()+" test boardAdd Post 실행");
+		System.out.println("test 한글 인코딩 : "+board);
 		boardService.AddBoard(board);
 		return "redirect:/board/boardList";
 	}
