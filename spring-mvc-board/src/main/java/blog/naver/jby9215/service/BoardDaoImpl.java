@@ -18,7 +18,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int insertBoard(Board board) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(BOARD_NS+"boardAdd",board);
+		return sqlSession.insert(BOARD_NS+"boardAdd", board);
 	}
 	@Override
 	public int selectTotalBoardCount() {
@@ -35,5 +35,14 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(BOARD_NS+"selectBoardByKey", boardNo);
 	}
-	
+	@Override
+	public int deleteBoard(Board board) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(BOARD_NS+"boardDelete", board);
+	}
+	@Override
+	public int updateBoard(Board board) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(BOARD_NS+"boardUpdate", board);
+	}
 }

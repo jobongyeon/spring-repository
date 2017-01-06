@@ -6,4 +6,6 @@ public interface BoardService {
 	public int AddBoard(Board board);
 	Map<String, Object> getBoardListPerCurrentPage(int currentPage);
 	Board boardView(int boardNo);
+	int boardRemove(Board board);
+	int boardUpdate(Board board);
 }

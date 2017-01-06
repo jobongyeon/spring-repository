@@ -19,7 +19,7 @@ public class BoardController {
 	//Controller 객체에서 Model은 Map
 	@RequestMapping(value="/board/boardList")
 	public String boardList(Model model,
-			@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+		@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 		System.out.println(this.getClass()+" test boardList 실행");
 		
 		Map<String, Object> returnMap = boardService.getBoardListPerCurrentPage(currentPage);
@@ -32,7 +32,6 @@ public class BoardController {
 	@RequestMapping(value="/board/boardAdd", method=RequestMethod.POST)
 	public String boardAdd(Board board) {
 		System.out.println(this.getClass()+" test boardAdd Post 실행");
-		System.out.println(board);
 		boardService.AddBoard(board);
 		return "redirect:/board/boardList";
 	}
@@ -42,9 +41,39 @@ public class BoardController {
 		return "/board/boardAdd"; //forward
 	}
 	@RequestMapping(value="/board/boardView")
-	public String boardView(int boardNo) {
+	public String boardView(Model model, @RequestParam(value="boardNo")int boardNo) {
 		System.out.println(this.getClass()+" test boardView 실행");
-		boardService.boardView(boardNo);
+		model.addAttribute("board", boardService.boardView(boardNo));
 		return "/board/boardView";
+	}
+	@RequestMapping(value="/board/boardRemove", method=RequestMethod.GET)
+	public String boardRemove(Model model, @RequestParam(value="boardNo")int boardNo){
+		System.out.println(this.getClass()+" test boardRemove Get 실행");
+		model.addAttribute("boardNo", boardNo);
+		return "/board/boardRemove";
+	}
+	@RequestMapping(value="/board/boardRemove", method=RequestMethod.POST)
+	public String boardRemove(Model model, Board board){
+		System.out.println(this.getClass()+" test boardRemove Post 실행");
+		if(boardService.boardRemove(board) != 1) {
+			model.addAttribute("boardNo", board.getBoardNo());
+			return "/board/boardRemove";
+		}
+		return "redirect:/board/boardList";
+	}
+	@RequestMapping(value="/board/boardModify", method=RequestMethod.GET)
+	public String boardUpdate(Model model, @RequestParam(value="boardNo")int boardNo){
+		System.out.println(this.getClass()+" test boardUpdate GET 실행");
+		model.addAttribute("boardNo", boardNo);
+		return "/board/boardModify";
+	}
+	@RequestMapping(value="/board/boardModify", method=RequestMethod.POST)
+	public String boardUpdate(Model model, Board board) {
+		System.out.println(this.getClass()+" test boardUpdate POST 실행");
+		if(boardService.boardUpdate(board) != 1) {
+			model.addAttribute("boardNo", board.getBoardNo());
+				return "/board/boardModify";
+		}
+		return "redirect:/board/boardList";
 	}
 }

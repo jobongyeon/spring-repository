@@ -4,17 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="blog.naver.jby9215.BoardMapper">
+	<update id="boardUpdate"
+			parameterType="blog.naver.jby9215.service.Board">
+		UPDATE board SET 
+			board_title = #{boardTitle}, 
+			board_content = #{boardContent} 
+		WHERE 
+			board_no = #{boardNo} 
+		AND 
+			board_pw = #{boardPw}
+	</update>
+
+	<delete id="boardDelete"
+			parameterType="blog.naver.jby9215.service.Board">
+			DELETE FROM board 
+			WHERE 
+				board_no = #{boardNo} 
+			AND 
+				board_pw = #{boardPw}
+	</delete>
+
 	<select id="selectBoardByKey"
-			resultType="blog.naver.jby9215.service.Board">
-			SELECT 
-				board_title, 
-				board_content, 
-				board_user, 
-				board_date 
+			resultType="blog.naver.jby9215.service.Board"
+			parameterType="int">
+			SELECT
+				board_no as boardNo, 
+				board_title as boardTitle, 
+				board_content as boardContent, 
+				board_user as boardUser, 
+				board_date as boardDate 
 			FROM board 
 			WHERE 
-				board_no = 
-				#{boardNo}
+				board_no = #{boardNo}
 	</select>
 	
 	<select id="selectTotalBoardCount"
